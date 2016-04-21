@@ -102,8 +102,7 @@
           "type": "config",
           "dependsOn": [
             "[resourceId('Microsoft.Web/Sites', parameters('name'))]",
-            "[resourceId('SuccessBricks.ClearDB/databases', parameters('databaseName'))]",
-            "[concat('Microsoft.Web/Sites/', parameters('name'), '/Extensions/MSDeploy')]"
+            "[resourceId('SuccessBricks.ClearDB/databases', parameters('databaseName'))]"
           ],
           "properties": {
             "defaultConnection": {
