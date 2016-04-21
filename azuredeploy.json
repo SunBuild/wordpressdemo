@@ -86,7 +86,7 @@
           "name": "connectionstrings",
           "type": "config",
           "dependsOn": [
-            "[resourceId('Microsoft.Web/Sites', parameters('name'))]",
+            "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]",
             "[resourceId('SuccessBricks.ClearDB/databases', parameters('databaseName'))]"
           ],
           "properties": {
