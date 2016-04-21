@@ -81,22 +81,7 @@
         "serverFarm":"[parameters('hostingPlanName')]"
       },
       "resources":[
-        {
-          "apiVersion":"2014-04-01",
-          "name":"web",
-          "type":"sourcecontrols",
-          "dependsOn":[
-            "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]"
-          ],
-          "properties":{
-            "RepoUrl":"[parameters('repoUrl')]",
-            "branch":"[parameters('branch')]",
-            "IsManualIntegration":true
-          }
-        }
-      ]
-    },
-	{
+	  {
           "apiVersion": "2015-04-01",
           "name": "connectionstrings",
           "type": "config",
@@ -111,6 +96,21 @@
             }
           }
         },
+        {
+          "apiVersion":"2014-04-01",
+          "name":"web",
+          "type":"sourcecontrols",
+          "dependsOn":[
+            "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]"
+          ],
+          "properties":{
+            "RepoUrl":"[parameters('repoUrl')]",
+            "branch":"[parameters('branch')]",
+            "IsManualIntegration":true
+          }
+        }
+      ]
+    },	
 	  {
       "apiVersion":"2014-08-01-preview",
       "name":"[parameters('jobCollectionName')]",
