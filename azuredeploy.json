@@ -97,7 +97,7 @@
               "name": "appsettings",
               "type": "config",
               "dependsOn": [
-                "[resourceId('Microsoft.Web/Sites/Slots', variables('siteName'), 'stage')]",
+                "[resourceId('Microsoft.Web/Sites/Slots', variables('siteName'), 'stage')]"
               ],
               "properties": {
                
@@ -145,7 +145,7 @@
               "name": "appsettings",
               "type": "config",
               "dependsOn": [
-                "[resourceId('Microsoft.Web/Sites/Slots', variables('siteName'), 'dev')]",
+                "[resourceId('Microsoft.Web/Sites/Slots', variables('siteName'), 'dev')]"
               ],
               "properties": {
                
