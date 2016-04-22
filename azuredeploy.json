@@ -39,9 +39,6 @@
     "branch":{
       "type":"string",
       "defaultValue":"master"
-    },
-    "jobCollectionName":{
-      "type":"string"
     }
   },
   "resources":[
