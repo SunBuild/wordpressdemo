@@ -113,8 +113,7 @@
               ],
               "properties": {
                  }
-              }
-            },
+              },
             {
               "apiVersion":"2015-04-01",
               "name":"web",
@@ -162,8 +161,7 @@
               ],
               "properties": {
                  }
-              }
-            },
+              },            
             {
               "apiVersion":"2015-04-01",
               "name":"web",
