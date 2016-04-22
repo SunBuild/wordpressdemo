@@ -132,7 +132,7 @@
             "[resourceId('SuccessBricks.ClearDB/databases', variables('stageDatabaseName'))]"
           ],
           "properties": {
-            "cleardb_stage_db": {
+            "cleardb_connectionstring": {
               "value": "[reference(concat('SuccessBricks.ClearDB/databases/', parameters('databaseName'),'-stage')).connectionString]",
               "type": "MySQL"
             }
@@ -180,7 +180,7 @@
           ],
           "properties": {
             "defaultConnection": {
-              "cleardb_dev_db": "[reference(concat('SuccessBricks.ClearDB/databases/', parameters('databaseName'),'-dev')).connectionString]",
+              "cleardb_connectionstring": "[reference(concat('SuccessBricks.ClearDB/databases/', parameters('databaseName'),'-dev')).connectionString]",
               "type": "MySQL"
               }
             }
@@ -209,7 +209,7 @@
             "[resourceId('SuccessBricks.ClearDB/databases', parameters('databaseName'))]"
           ],
           "properties": {
-            "cleardb_prod_db": {
+            "cleardb_connectionstring": {
               "value": "[reference(concat('SuccessBricks.ClearDB/databases/', parameters('databaseName'))).connectionString]",
               "type": "MySQL"
             }
