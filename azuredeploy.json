@@ -19,7 +19,7 @@
       "allowedValues":[        
         "Standard"
       ],
-      "defaultValue":"Free"
+      "defaultValue":"Standard"
     },
     "workerSize":{
       "type":"string",
