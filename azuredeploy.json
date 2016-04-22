@@ -129,6 +129,7 @@
           "type": "config",
           "dependsOn": [
             "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]",
+			"[resourceId('Microsoft.Web/Sites/Slots', parameters('siteName'), 'stage')]",
             "[resourceId('SuccessBricks.ClearDB/databases', variables('stageDatabaseName'))]"
           ],
           "properties": {
@@ -176,6 +177,7 @@
           "type": "config",
           "dependsOn": [
             "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]",
+			"[resourceId('Microsoft.Web/Sites/Slots', parameters('siteName'), 'dev')]",
             "[resourceId('SuccessBricks.ClearDB/databases', variables('devDatabaseName'))]"
           ],
           "properties": {
