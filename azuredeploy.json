@@ -81,6 +81,104 @@
         "serverFarm":"[parameters('hostingPlanName')]"
       },
       "resources":[
+	   {
+          "apiVersion": "2015-04-01",
+          "name": "stage",
+          "type": "slots",
+          "location": "[parameters('siteLocation')]",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/Sites', variables('siteName'))]"
+          ],
+          "properties": {
+          },
+          "resources": [
+            {
+              "apiVersion": "2015-04-01",
+              "name": "appsettings",
+              "type": "config",
+              "dependsOn": [
+                "[resourceId('Microsoft.Web/Sites/Slots', variables('siteName'), 'stage')]",
+              ],
+              "properties": {
+               
+              }
+            },
+            {
+              "apiVersion": "2015-04-01",
+              "name": "connectionstrings",
+              "type": "config",
+              "dependsOn": [
+                "[resourceId('Microsoft.Web/Sites/Slots', variables('siteName'), 'stage')]"
+                
+              ],
+              "properties": {
+                 }
+              }
+            },
+            {
+              "apiVersion":"2015-04-01",
+              "name":"web",
+              "type":"sourcecontrols",
+              "dependsOn":[
+                "[resourceId('Microsoft.Web/Sites/Slots', variables('apiSiteName'), 'stage')]",
+                "[resourceId('Microsoft.Web/Sites/Slots/config', variables('apiSiteName'), 'stage', 'appsettings')]"
+              ],
+              "properties":{
+                "RepoUrl":"[parameters('repoUrl')]",
+                "branch":"stage"
+              }
+            }
+          ]
+        },
+		 {
+          "apiVersion": "2015-04-01",
+          "name": "dev",
+          "type": "slots",
+          "location": "[parameters('siteLocation')]",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/Sites', variables('siteName'))]"
+          ],
+          "properties": {
+          },
+          "resources": [
+            {
+              "apiVersion": "2015-04-01",
+              "name": "appsettings",
+              "type": "config",
+              "dependsOn": [
+                "[resourceId('Microsoft.Web/Sites/Slots', variables('siteName'), 'dev')]",
+              ],
+              "properties": {
+               
+              }
+            },
+            {
+              "apiVersion": "2015-04-01",
+              "name": "connectionstrings",
+              "type": "config",
+              "dependsOn": [
+                "[resourceId('Microsoft.Web/Sites/Slots', variables('siteName'), 'dev')]"
+                
+              ],
+              "properties": {
+                 }
+              }
+            },
+            {
+              "apiVersion":"2015-04-01",
+              "name":"web",
+              "type":"sourcecontrols",
+              "dependsOn":[
+                "[resourceId('Microsoft.Web/Sites/Slots', variables('apiSiteName'), 'dev')]",
+                "[resourceId('Microsoft.Web/Sites/Slots/config', variables('apiSiteName'), 'dev', 'appsettings')]"
+              ],
+              "properties":{
+                "RepoUrl":"[parameters('repoUrl')]",
+                "branch":"dev"
+              }
+            }
+          ]
+        },
 	  {
           "apiVersion": "2015-04-01",
           "name": "connectionstrings",
