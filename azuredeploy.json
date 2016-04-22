@@ -57,6 +57,30 @@
 			"provision_source": "RMS"
 		  }
 	  },
+	  {
+		  "apiVersion": "2014-01-01",
+		  "name": "[(concat(parameters('databaseName'), '-dev'))]",
+		  "type": "SuccessBricks.ClearDB/databases",
+		  "plan": {
+			"name": "Free"
+		  },
+		  "location": "[parameters('siteLocation')]",
+		  "tags": {
+			"provision_source": "RMS"
+		  }
+	  },
+	  {
+		  "apiVersion": "2014-01-01",
+		  "name": "[(concat(parameters('databaseName'), '-stage'))]",
+		  "type": "SuccessBricks.ClearDB/databases",
+		  "plan": {
+			"name": "Free"
+		  },
+		  "location": "[parameters('siteLocation')]",
+		  "tags": {
+			"provision_source": "RMS"
+		  }
+	  },
     {
       "apiVersion":"2014-11-01",
       "name":"[parameters('hostingPlanName')]",
@@ -88,9 +112,7 @@
           "location": "[parameters('siteLocation')]",
           "dependsOn": [
             "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]"
-          ],
-          "properties": {
-          },
+          ],          
           "resources": [
             {
               "apiVersion": "2015-04-01",
@@ -99,21 +121,23 @@
               "dependsOn": [
                 "[resourceId('Microsoft.Web/Sites/Slots', parameters('siteName'), 'stage')]"
               ],
-              "properties": {
-               
-              }
+             
             },
             {
-              "apiVersion": "2015-04-01",
-              "name": "connectionstrings",
-              "type": "config",
-              "dependsOn": [
-                "[resourceId('Microsoft.Web/Sites/Slots', parameters('siteName'), 'stage')]"
-                
-              ],
-              "properties": {
-                 }
-              },
+          "apiVersion": "2015-04-01",
+          "name": "connectionstrings",
+          "type": "config",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]",
+            "[resourceId('SuccessBricks.ClearDB/databases', concat(parameters('databaseName'),'-stage'))]"
+          ],
+          "properties": {
+            "defaultConnection": {
+              "value": "[reference(concat('SuccessBricks.ClearDB/databases/', parameters('databaseName'),'-stage')).connectionString]",
+              "type": "MySQL"
+            }
+          }
+        },
             {
               "apiVersion":"2015-04-01",
               "name":"web",
@@ -136,9 +160,7 @@
           "location": "[parameters('siteLocation')]",
           "dependsOn": [
             "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]"
-          ],
-          "properties": {
-          },
+          ],          
           "resources": [
             {
               "apiVersion": "2015-04-01",
@@ -146,22 +168,23 @@
               "type": "config",
               "dependsOn": [
                 "[resourceId('Microsoft.Web/Sites/Slots', parameters('siteName'), 'dev')]"
-              ],
-              "properties": {
-               
-              }
+              ]
             },
             {
-              "apiVersion": "2015-04-01",
-              "name": "connectionstrings",
-              "type": "config",
-              "dependsOn": [
-                "[resourceId('Microsoft.Web/Sites/Slots', parameters('siteName'), 'dev')]"
-                
-              ],
-              "properties": {
-                 }
-              },            
+          "apiVersion": "2015-04-01",
+          "name": "connectionstrings",
+          "type": "config",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]",
+            "[resourceId('SuccessBricks.ClearDB/databases', concat(parameters('databaseName'),'-dev')]"
+          ],
+          "properties": {
+            "defaultConnection": {
+              "value": "[reference(concat('SuccessBricks.ClearDB/databases/', parameters('databaseName'),'-dev')).connectionString]",
+              "type": "MySQL"
+              }
+            }
+           },           
             {
               "apiVersion":"2015-04-01",
               "name":"web",
@@ -201,62 +224,11 @@
           ],
           "properties":{
             "RepoUrl":"[parameters('repoUrl')]",
-            "branch":"[parameters('branch')]",
+            "branch":"master",
             "IsManualIntegration":true
           }
         }
       ]
-    },	
-	  {
-      "apiVersion":"2014-08-01-preview",
-      "name":"[parameters('jobCollectionName')]",
-      "type":"Microsoft.Scheduler/jobCollections",
-      "dependsOn":[
-        "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]"
-      ],
-      "location":"[parameters('siteLocation')]",
-      "properties":{
-        "sku":{
-          "name":"standard"
-        },
-        "quota":{
-          "maxJobCount":"10",
-          "maxRecurrence":{
-            "Frequency":"minute",
-            "interval":"1"
-          }
-        }
-      },
-      "resources":[		      
-        {
-          "apiVersion":"2014-08-01-preview",
-          "name":"wordpress-cron",
-          "type":"jobs",
-          "dependsOn":[
-            "[resourceId('Microsoft.Scheduler/jobCollections', parameters('jobCollectionName'))]"
-          ],
-          "properties":{
-            "startTime":"2015-02-10T00:08:00Z",
-            "action":{
-              "request":{
-                "uri":"[concat(list(resourceId('Microsoft.Web/sites/config', parameters('siteName'), 'publishingcredentials'), '2014-06-01').properties.scmUri, '/api/triggeredjobs/cron/run')]",
-                "method":"POST"
-              },
-              "type":"http",
-              "retryPolicy":{
-                "retryType":"Fixed",
-                "retryInterval":"PT1M",
-                "retryCount":2
-              }
-            },
-            "state":"enabled",
-            "recurrence":{
-              "frequency":"minute",
-              "interval":1
-            }
-          }
-        }
-      ]
-    }
+    }	  
   ]
 }
