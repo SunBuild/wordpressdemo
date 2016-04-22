@@ -15,18 +15,6 @@
  */
 
 
-// ** MySQL settings - You can get this info from your web host ** //
-/** The name of the database for WordPress 
-//define('WP_CACHE', true); //Added by WP-Cache Manager
-define( 'WPCACHEHOME', 'D:\home\site\wwwroot\wp-content\plugins\wp-super-cache/' ); //Added by WP-Cache Manager
-define('DB_NAME', 'wordpressdemocleardb');
-
-define('DB_USER', 'b00f38930cf71f');
-
-define('DB_PASSWORD', 'd2745cda');
-
-define('DB_HOST', 'us-cdbr-azure-west-c.cloudapp.net');*/
-
 $connectstr_dbhost = '';
 $connectstr_dbname = '';
 $connectstr_dbusername = '';
@@ -74,9 +62,12 @@ define('AUTH_SALT',        'unique string');
 define('SECURE_AUTH_SALT', 'unique string');
 define('LOGGED_IN_SALT',   'unique string');
 define('NONCE_SALT',       'unique string');
+
 define('DISABLE_WP_CRON', true);
-define('WP_HOME','http://wordpressdemocleardb1-dev.azurewebsites.net/');
-define('WP_SITEURL','http://wordpressdemocleardb1-dev.azurewebsites.net/');
+
+$base_url = "http://$_SERVER[HTTP_HOST]";
+define('WP_HOME',$base_url);
+define('WP_SITEURL',$base_url);
 
 /**#@-*/
 
