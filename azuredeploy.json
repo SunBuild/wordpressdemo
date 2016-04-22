@@ -120,8 +120,8 @@
               "name":"web",
               "type":"sourcecontrols",
               "dependsOn":[
-                "[resourceId('Microsoft.Web/Sites/Slots', variables('apiSiteName'), 'stage')]",
-                "[resourceId('Microsoft.Web/Sites/Slots/config', variables('apiSiteName'), 'stage', 'appsettings')]"
+                "[resourceId('Microsoft.Web/Sites/Slots', variables('siteName'), 'stage')]",
+                "[resourceId('Microsoft.Web/Sites/Slots/config', variables('siteName'), 'stage', 'appsettings')]"
               ],
               "properties":{
                 "RepoUrl":"[parameters('repoUrl')]",
