@@ -176,7 +176,7 @@
           "type": "config",
           "dependsOn": [
             "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]",
-            "[resourceId('SuccessBricks.ClearDB/databases', variables('devDatabaseName')]"
+            "[resourceId('SuccessBricks.ClearDB/databases', variables('devDatabaseName'))]"
           ],
           "properties": {
             "defaultConnection": {
