@@ -87,11 +87,11 @@ $table_prefix  = 'wp_';
 define('WP_DEBUG', false);
 
 /* That's all, stop editing! Happy blogging. */
-
+/*
 define('WP_HOME', 'http://' . $_SERVER['HTTP_HOST']);
 define('WP_SITEURL', 'http://' . $_SERVER['HTTP_HOST']);
 define('WP_CONTENT_URL', '/wp-content');
-define('DOMAIN_CURRENT_SITE', $_SERVER['HTTP_HOST']);
+define('DOMAIN_CURRENT_SITE', $_SERVER['HTTP_HOST']); */
 
 /** Absolute path to the WordPress directory. */
 if ( !defined('ABSPATH') )
