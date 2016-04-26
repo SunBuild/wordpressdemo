@@ -111,6 +111,8 @@
           "dependsOn": [
             "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]"
           ],          
+          "properties": {
+          },
           "resources": [
             {
               "apiVersion": "2015-04-01",
@@ -159,6 +161,8 @@
           "dependsOn": [
             "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]"
           ],          
+          "properties": {
+          },
           "resources": [
             {
               "apiVersion": "2015-04-01",
